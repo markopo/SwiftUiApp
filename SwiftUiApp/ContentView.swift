@@ -13,23 +13,25 @@ struct ContentView: View {
     @State var titleColor: Color = Color.red
     
     var body: some View {
-        VStack {
-            HStack {
+        GeometryReader { geometry in
+        VStack(alignment: .center) {
+            
+            HStack(alignment: .top, spacing: 3) {
               Text("Swift UI APP is Cool!")
                 .font(.largeTitle)
                 .bold()
-            }.background(titleColor)
+            }.background(self.titleColor)
              .foregroundColor(Color.white)
              .padding()
-             .border(titleColor, width: 5)
-            
-
+             .border(self.titleColor, width: 5)
+             
             VStack {
                 Text("Placeholder")
             }
             .padding()
             
-            VStack {
+            VStack(alignment: .center, spacing: 5) {
+                
                 Button(action: {
                     print("red button")
                     self.titleColor = Color.red
@@ -39,17 +41,19 @@ struct ContentView: View {
                       .foregroundColor(Color.red)
                       .font(.title)
                       .border(Color.red, width: 5)
-                }
+                }.frame(width: geometry.size.width)
+                
                 Button(action: {
                     print("green button")
                     self.titleColor = Color.green
-                }) {
+                    }) {
                       Text("Green Button")
                       .padding()
                       .foregroundColor(Color.green)
                       .font(.title)
                       .border(Color.green, width: 5)
-                }
+                }.frame(width: geometry.size.width)
+                
                 Button(action: {
                     print("blue button")
                     self.titleColor = Color.blue
@@ -59,11 +63,15 @@ struct ContentView: View {
                       .foregroundColor(Color.blue)
                       .font(.title)
                       .border(Color.blue, width: 5)
-                }
+                }.frame(width: geometry.size.width)
             }
             .background(Color.gray)
             .padding()
+            
+            Spacer()
+
         }
+      }
     }
 }
 
